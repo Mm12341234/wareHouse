@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{font-awesome/css/font-awesome.css}" rel="stylesheet">
+    <link th:href="@{css/homePage.css}" rel="stylesheet">
+    <script th:src="@{echarts/echarts.js}"></script>
+    <style type="text/css">
+        .pageHome{
+            margin-top:25px;
+            margin-left:7%;
+        }
+        #main{
+            border:1px solid #cccccc;
+            margin-left:3%;
+            padding:5px;
+            margin-top:30px;
+            width:73%;
+            height:500px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="pageHome">
+    <!--各类小图标-->
+    <div class="quick-actions_homepage">
+        <ul class="quick-actions">
+            <li class="bg_lb"> <a href=""> <i class="icon-dashboard"></i> <span class="label label-important">20</span><br/>&nbsp;&nbsp;温度报警</a> </li>
+            <li class="bg_lg span3"> <a href=""> <i class="icon-signal"></i><br/>图表统计</a> </li>
+            <li class="bg_ly"> <a href=""> <i class="icon-bullhorn"></i><span class="label label-success">101</span> <br/>保质期报警 </a> </li>
+            <li class="bg_lo"> <a href=""> <i class="icon-th"></i><br/>表格</a> </li>
+            <li class="bg_lo span3"> <a href=""> <i class="icon-th-list"></i><br/> 表单</a> </li>
+            <li class="bg_ls"> <a href=""> <i class="icon-bell"></i><br/>库存容量</a> </li>
+            <li class="bg_lb"> <a href=""> <i class="icon-comment-alt"></i><br/>进库食品</a> </li>
+            <li class="bg_lg"> <a href=""> <i class="icon-calendar"></i><br/>日历</a> </li>
+        </ul>
+    </div>
+    <br><br><br><br><br><br><br><br><br><br>
+    <!--仓库报警次数的的饼状图/折线图-->
+    <div class="storageTemperature" id="main">
+
+    </div>
+</div>
+<script type="text/javascript">
+    var myChart = echarts.init(document.getElementById('main'));
+
+    option = {
+        //设计折线的标题样式什么的
+        title: {
+            text: '仓库该月报警次数',
+            subtext: '10分钟',
+            //link: 'http//:www.baidu.com'
+            textStyle: {
+                color:'red',
+                fontStyle: 'normal',
+                fontSize: 20
+            }
+        },
+
+        tooltip: {
+            //坐标轴触发，主要在柱状图，折线图等会使用类目轴的图表中使用。
+            trigger: 'axis'
+        },
+        // legend: {
+        //     data:['date1','date2','date3']
+        // },
+        toolbox: {
+            show: true,
+            feature: {
+                dataZoom: {
+                    yAxisIndex: 'none'
+                },
+                dataView: {readOnly: false},
+                magicType: {type: ['line', 'bar']},
+                restore: {},
+                saveAsImage: {}
+            }
+        },
+        xAxis:  {
+            type: 'category',
+            boundaryGap: false,
+            data: ['12:00','13:00','14:00','15:00','16:00','17:00','18:00']
+        },
+        yAxis: {
+            type: 'value',
+            axisLabel: {
+                formatter: '{value} C'
+            }
+        },
+        series: [
+            {
+                name:'y1',
+                type:'line',
+                data:[11, 11, 15, 13, 12, 13, 10],
+                //显示最高的温度和最低的温度
+                markPoint: {
+                    data: [
+                        {type: 'max', name: '最大值'},
+                        {type: 'min', name: '最小值'}
+                    ]
+                },
+                //显示平均温度
+                markLine: {
+                    data: [
+                        {type: 'average', name: 'average'}
+                    ]
+                }
+            },
+
+            {
+                name:'y2',
+                type:'line',
+                data:[1, 5, 2, 5, 3, 2, 0],
+                markPoint: {
+                    data: [
+                        //{name: '�����', value: -2, xAxis: 2, yAxis: -1.5}
+                        {type: 'max', name: '最大值'},
+                        {type: 'min', name: '最小值'}
+                    ]
+                },
+                markLine: {
+                    data: [
+                        {type: 'average', name: 'aver2'},
+                        // [{
+                        //    symbol: 'none',
+                        //   x: '90%',
+                        //    yAxis: 'max'
+                        //  }, {
+                        //     symbol: 'circle',
+                        //    label: {
+                        //        normal: {
+                        //        position: 'start',
+                        //           formatter: 'format'
+                        //      }
+                        ////    },
+                        //   type: 'max',
+                        //   name: '��ߵ�'
+                        // }]
+                    ]
+                }
+            }
+        ]
+    };
+
+
+    myChart.setOption(option);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{bootstrap/dist/css/bootstrap.css}" rel="stylesheet">
+    <script th:src="@{js/jquery-1.12.4.min.js}"></script>
+    <script th:src="@{bootstrap/dist/js/bootstrap.js}"></script>
+
+    <link th:href="@{Daterangepicker/css/font-awesome.css}" rel="stylesheet"/>
+    <link th:href="@{Daterangepicker/css/bootstrap.css}" rel="stylesheet"/>
+    <link th:href="@{Daterangepicker/css/daterangepicker.css}" rel="stylesheet" />
+    <script th:src="@{Daterangepicker/js/jquery.js}" type="text/javascript"></script>
+    <script th:src="@{Daterangepicker/js/common.js}" type="text/javascript"></script>
+    <script th:src="@{Daterangepicker/js/date-time/moment.js}" type="text/javascript"></script>
+    <script th:src="@{Daterangepicker/js/date-time/daterangepicker.js}" type="text/javascript"></script>
+    <style type="text/css">
+        .findFood{
+            margin-top:50px;
+            margin-left:5%;
+            margin-right:5%;
+        }
+    </style>
+</head>
+<body>
+<div class="findFood">
+    <!--查询的一栏-->
+    <div>
+        <div class="row">
+            <div class="col-xs-3">
+                <input type="text" class="form-control" placeholder="请输入查询食物的编号或名称等">
+            </div>
+            <div class="col-xs-3">
+                <div class="form-group">
+                    <label class="sr-only" >Amount (in dollars)</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">日期</div>
+                        <input class="form-control date-picker" id="dateTimeRange" value="" type="text">
+                        <input name="beginTime" id="beginTime" value="" type="hidden">
+                        <input name="endTime" id="endTime" value="" type="hidden">
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-primary" id="findFood">查询</button>
+        </div>
+    </div>
+    <hr><br>
+    <div class="findContent" id="findContent">
+
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('#dateTimeRange').daterangepicker({
+            applyClass: 'btn-sm btn-success',
+            cancelClass: 'btn-sm btn-default',
+            locale: {
+                applyLabel: '确认',
+                cancelLabel: '取消',
+                fromLabel: '起始时间',
+                toLabel: '结束时间',
+                customRangeLabel: '自定义',
+                firstDay: 1
+            },
+            ranges: {
+                //'最近1小时': [moment().subtract('hours',1), moment()],
+                '今日': [moment().startOf('day'), moment()],
+                '昨日': [moment().subtract('days', 1).startOf('day'), moment().subtract('days', 1).endOf('day')],
+                '最近7日': [moment().subtract('days', 6), moment()],
+                '最近30日': [moment().subtract('days', 29), moment()],
+                '本月': [moment().startOf("month"), moment().endOf("month")],
+                '上个月': [moment().subtract(1, "month").startOf("month"), moment().subtract(1, "month").endOf("month")]
+            },
+            opens: 'right',	// 日期选择框的弹出位置
+            separator: ' 至 ',
+            showWeekNumbers: true,		// 是否显示第几周
+            timePicker: true,
+            timePickerIncrement : 10,	// 时间的增量，单位为分钟
+            timePicker12Hour : false,	// 是否使用12小时制来显示时间
+            maxDate : moment(),			// 最大时间
+            format: 'YYYY-MM-DD'
+
+        }, function (start, end, label) { // 格式化日期显示框
+            $('#beginTime').val(start.format('YYYY-MM-DD'));
+            $('#endTime').val(end.format('YYYY-MM-DD'));
+        })
+            .next().on('click', function () {
+            $(this).prev().focus();
+        });
+    });
+
+    /*
+     *  查询食物
+     */
+    $('#findFood').click(
+        function(){
+            $.ajax({
+                url: "/foods/showAllFood",
+                type:"POST",
+                data:{
+                    "currentPage": 1
+                },
+                cache: false,
+                success: function (html) {
+                    $("#findContent").empty();
+                    $("#findContent").append(html);
+                }
+            });
+        })
+</script>
+</body>
+</html>

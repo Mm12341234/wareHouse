@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style type="text/css">
+    #autoPutInStorage{
+        font-size:16px;
+        width:75%;
+        margin-left:8%;
+        margin-top:50px;
+    }
+    .findButton{
+        margin-top:-5px;
+        margin-bottom:-5px;
+    }
+    .findNav{
+        float:right;
+    }
+</style>
+<body>
+<div id="autoPutInStorage">
+    <h4 style="font-size:22px;">入库信息</h4>
+    <hr>
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>名称</th>
+            <th>种类</th>
+            <th>数量</th>
+            <th>位置</th>
+            <th>入库时间</th>
+            <th>入库状态</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="allFood:${allFoods}">
+            <td>[[${allFood.foodId}]]</td>
+            <td th:text="${allFood.foodName}"></td>
+            <td th:text="${allFood.foodTypeId}"></td>
+            <td>[[${allFood.foodNums}]]</td>
+            <td th:text="${allFood.foodHouseId}"></td>
+            <td th:text="${allFood.foodStoragetime}"></td>
+            <td><button class="btn btn-success findButton">成功</button></td>
+        </tr>
+        </tbody>
+    </table>
+    <!--分页码-->
+    <nav class="findNav">
+        <ul class="pagination">
+            <li th:class="${pageInfo.hasPreviousPage}? '':'disabled'">
+                <a th:onclick="'javascript:turnToPage('+${pageInfo.pageNum-1}+')'" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </li>
+            <!--导航吗-->
+            <li th:each="nav:${pageInfo.navigatepageNums}" th:class="${pageInfo.pageNum==nav}? 'active':''">
+                <a th:onclick="'javascript:turnToPage('+${nav}+')'" th:text="${nav}"></a>
+            </li>
+
+            <!--<li th:each="nav:${pageInfo.navigatepageNums}">-->
+            <!--<a th:onclick="'javascript:turnToPage('+${nav}+')'" th:text="${nav}"></a>-->
+            <!--</li>-->
+
+            <li th:class="${pageInfo.hasNextPage}? '':'disabled'">
+                <a th:onclick="'javascript:turnToPage('+${pageInfo.pageNum+1}+')'" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<script type="text/javascript">
+    function turnToPage(pageNum){
+        $.ajax({
+            url: "/putIn/autoPutInStorage",
+            type:"POST",
+            data: {
+                "currentPage": pageNum
+            },
+            cache: false,
+            success: function (html) {
+                /*
+                 *注意ajax删除那个容器里面的东西
+                 */
+                $("#content").empty();
+                $("#content").append(html);
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

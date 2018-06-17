@@ -1,0 +1,232 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>智能仓库管理系统</title>
+    <!--引入主面板的样式-->
+    <link th:href="@{css/warehouse.css}" rel="stylesheet">
+    <link th:href="@{bootstrap/dist/css/bootstrap.css}" rel="stylesheet">
+    <link th:href="@{font-awesome/css/font-awesome.css}" rel="stylesheet">
+    <script th:src="@{js/jquery-1.12.4.min.js}"></script>
+    <script th:src="@{bootstrap/dist/js/bootstrap.js}"></script>
+</head>
+<body>
+<!--顶部导航条-->
+<nav class="navbar navbar-dark bg-primary">
+    <ul class="nav navbar-nav">
+        <li class="nav-item"><img th:src="@{img/logo.png}" class="logo"></li>
+    </ul>
+    <ul class="nav navbar-nav pull-right">
+        <li class="nav-item"><button class="btn btn-secondary exitButton">注销</button></li>
+    </ul>
+</nav>
+
+<!--自适应布局-->
+<div class="container-fluid">
+    <div class="row">
+        <!---左侧导航栏-->
+        <div class="sidebar containerLeft">
+            <ul class="nav nav-sidebar">
+                <li>
+                    <a href="#" onclick="addContent('homePage')">
+                        <span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;首页
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="addContent('admin')">
+                        <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp;个人中心
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="addContent('ditu')">
+                        <i class="glyphicon glyphicon-cog"></i>&nbsp;&nbsp;&nbsp;仓库管理
+                    </a>
+                </li>
+                <!--食品入库-->
+                <li>
+                    <a href="#" class="putInStorage">
+                        <span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;&nbsp;食品入库
+                    </a>
+                    <ul class="putInStorageList">
+                        <li><a href="#" onclick="addContent('autoPutInStorage')">自动入库</a></li>
+                        <li><a href="#" onclick="addContent('putInStorage')">手动入库</a></li>
+                    </ul>
+                </li>
+                <!--食品出库-->
+                <li>
+                    <a href="#" class="putOutStorage">
+                        <span class="glyphicon glyphicon-log-out"></span>&nbsp;&nbsp;&nbsp;食品出库
+                    </a>
+                    <ul class="putOutStorageList">
+                        <li><a href="#" onclick="addContent('autoPutOutStorage')">自动出库</a></li>
+                        <li><a href="#" onclick="addContent('putOutStorage')">手动出库</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#" onclick="addContent('showFoodTemperature')">
+                        <i class="icon-dashboard"></i>&nbsp;&nbsp;&nbsp;食物温度
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" onclick="addContent('findFood')">
+                        <i class="icon-search"></i>&nbsp;&nbsp;&nbsp;货物查找
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" onclick="addContent('')">
+                        <span class="glyphicon glyphicon-bell"></span>&nbsp;&nbsp;&nbsp;紧急信息
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" onclick="addContent('1')">
+                        <span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;&nbsp;设置
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" onclick="addContent('1')">
+                        <span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;&nbsp;帮助
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+        <!--右侧管理控制台-->
+        <div class="containerRight">
+
+            <div id="content">
+                <div class="frames">
+                    <iframe name="left" id="rightMain"  frameborder="false" scrolling="auto"
+                            style="border:none;" width="100%" height="580px" allowtransparency="true">
+                    </iframe>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    function addContent(num) {
+
+        $("#content").empty();
+        if(num=="homePage"){
+            $.ajax({
+                url: "/getPage/homePage",
+                type:"GET",
+                cache: false,
+                success: function (html) {
+                    $("#content").append(html);
+                }
+            });
+        } else if(num=="addFood"){
+            // window.location.href = "/foods/showAddFood";
+            $.ajax({
+                url: "/foods/showAddFood",
+                type:"GET",
+                cache: false,
+                success: function (html) {
+                    $("#content").append(html);
+                }
+            });
+        } else if(num=="showFood"){
+            // window.location.href = "/foods/showAddFood";
+            $.ajax({
+                url: "/foods/showAllFood",
+                type:"POST",
+                cache: false,
+                success: function (html) {
+                    $("#content").append(html);
+                }
+            });
+        }else if(num=="putInStorage"){
+            $.ajax({
+                url: "/putIn/putInStorage",
+                type:"GET",
+                cache: false,
+                success: function (html) {
+                    $("#content").append(html);
+                }
+            });
+        }else if(num=="autoPutInStorage"){
+            $.ajax({
+                url: "/putIn/autoPutInStorage",
+                type:"POST",
+                data:{
+                    "currentPage": 1
+                },
+                cache: false,
+                success: function (html) {
+                    $("#content").append(html);
+                }
+            });
+        } else if(num=="getFoodTemperature"){
+            $.ajax({
+                url: "/Foods/getFoodTemperature",
+                type:"POST",
+                data: {
+                    "foodId": '2'
+                },
+                cache: false,
+                success: function (html) {
+                    $("#content").append(html);
+                }
+            });
+        }else if(num=="showFoodTemperature"){
+            $.ajax({
+                url: "/Foods/showFoodTemperature",
+                type:"GET",
+                cache: false,
+                success: function (html) {
+                    $("#content").append(html);
+                }
+            });
+        }else if(num=="findFood"){
+            $.ajax({
+                url: "getPage/findPage",
+                type:"GET",
+                cache: false,
+                success: function (html) {
+                    $("#content").append(html);
+                }
+            });
+        }
+
+    }<!--函数addContent()-->
+
+
+
+    <!--左侧食品入库的下拉问题-->
+     $(document).ready(function(){
+         //入库下拉库点击事件
+         $(".putInStorageList").hide();
+         $(".putInStorage").click(function(){
+             if($(".putInStorageList").is(":visible")){
+                 $(".putInStorageList").hide();
+             }else{
+                 $(".putInStorageList").show();
+                 $(".putInStorageList").css("background","#ffffff");
+             }
+         });
+         //出库下拉库点击事件
+         $(".putOutStorageList").hide();
+         $(".putOutStorage").click(function(){
+             if($(".putOutStorageList").is(":visible")){
+                 $(".putOutStorageList").hide();
+             }else{
+                 $(".putOutStorageList").show();
+                 $(".putOutStorageList").css("background","#ffffff");
+             }
+         });
+
+     })
+
+</script>
+
+</body>
+</html>

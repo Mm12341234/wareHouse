@@ -1,0 +1,33 @@
+body {
+    /* background-color:blue; */
+    /* background-image:url(ͼƬ���·����urlȫ��); */
+    background-repeat: no-repeat;
+    backgroup: url("../static/img/login_bgp.jpg")
+}
+
+.form {
+    width: 500px;
+    margin: 400px auto;
+    border: 1px solid transparent;
+    border-color: transparent;
+    border-color: rgba(0, 0, 0, 0);
+    /*  	background-color: transparent; */
+
+}
+
+/*��Ӱ*/
+.fa {
+    display: inline-block;
+    top: 27px;
+    left: 6px;
+    position: relative;
+    color: #ccc;
+}
+
+input[type="text"], input[type="password"] {
+    padding-left: 26px;
+}
+
+.checkbox {
+    padding-left: 21px;
+}
