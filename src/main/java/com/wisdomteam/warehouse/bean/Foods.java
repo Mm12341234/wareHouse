@@ -6,7 +6,6 @@ public class Foods {
 
     private Integer foodId;
     private String foodName;
-    private Integer foodTypeId;
     private Double foodPrice;
     private Integer foodNums;
     private Integer foodShelflife;
@@ -14,7 +13,14 @@ public class Foods {
     private Integer foodShelvesId;
     private Integer foodHouseId;
     private Date foodStoragetime;
+    private FoodsType foodsType;
 
+    public FoodsType getFoodsType() {
+        return foodsType;
+    }
+    public void setFoodsType(FoodsType foodsType) {
+        this.foodsType = foodsType;
+    }
     public Integer getFoodId() {
         return foodId;
     }
@@ -26,12 +32,6 @@ public class Foods {
     }
     public void setFoodName(String foodName) {
         this.foodName = foodName;
-    }
-    public Integer getFoodTypeId() {
-        return foodTypeId;
-    }
-    public void setFoodTypeId(Integer foodTypeId) {
-        this.foodTypeId = foodTypeId;
     }
     public Double getFoodPrice() {
         return foodPrice;
@@ -79,16 +79,15 @@ public class Foods {
     public Foods() {
     }
 
-    public Foods(String foodName, Integer foodTypeId) {
+    public Foods(String foodName, FoodsType foodsType) {
         this.foodName = foodName;
-        this.foodTypeId = foodTypeId;
+        this.foodsType = foodsType;
     }
 
-    public Foods(String foodName, Integer foodTypeId, Double foodPrice,
+    public Foods(String foodName, FoodsType foodsType, Double foodPrice,
                  Integer foodNums, Integer foodShelflife, String foodProducer,
                  Integer foodShelvesId, Integer foodHouseId, Date foodStoragetime) {
         this.foodName = foodName;
-        this.foodTypeId = foodTypeId;
         this.foodPrice = foodPrice;
         this.foodNums = foodNums;
         this.foodShelflife = foodShelflife;
@@ -96,5 +95,6 @@ public class Foods {
         this.foodShelvesId = foodShelvesId;
         this.foodHouseId = foodHouseId;
         this.foodStoragetime = foodStoragetime;
+        this.foodsType=foodsType;
     }
 }
