@@ -124,7 +124,7 @@
             var dateTimeRange=$("#dateTimeRange").val();
             // alert(foodId+"     "+dateTimeRange);
             $.ajax({
-                url: "/foods/findFoodTemperature",
+                url: "/foods/findFoodsForTemperature",
                 type:"POST",
                 data:{
                     "foodId":foodId,

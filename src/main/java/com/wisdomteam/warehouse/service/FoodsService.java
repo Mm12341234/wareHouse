@@ -32,12 +32,12 @@ public class FoodsService {
 //        System.out.println("21121212"+allItems+"121212");
         //取分页后结果
         PageInfo<Foods> pageInfo=new PageInfo<>(allItems);
-        long total = pageInfo.getTotal();
-        System.out.println("总记录数="+total);
-        int pages = pageInfo.getPages();
-        System.out.println("总页数="+pages);
-        int pageize = pageInfo.getPageSize();
-        System.out.println("pageSize="+pageize);
+//        long total = pageInfo.getTotal();
+//        System.out.println("总记录数="+total);
+//        int pages = pageInfo.getPages();
+//        System.out.println("总页数="+pages);
+//        int pageize = pageInfo.getPageSize();
+//        System.out.println("pageSize="+pageize);
 //        int countNums = allItems.size();            //总记录数
 //        PageBean<Foods> pageData = new PageBean<>(currentPage, pageSize, countNums);
 //        pageData.setItems(allItems);
@@ -58,5 +58,18 @@ public class FoodsService {
         Foods foods=foodsMapper.getFoodsById(id);
         return foods;
     }
+
+    //根据食物ID或者日期查询食物（为查询食物温度）
+    public PageInfo<Foods> findFoodsByIdOrTime(int currentPage, int pageSize,int foodId, String dateTimeRange){
+        //设置分页
+        PageHelper.startPage(currentPage,pageSize);
+        //获取全部数据
+        List<Foods> allItems=foodsMapper.findFoodsByIdOrTime(foodId,dateTimeRange);
+        //取分页后结果
+        PageInfo<Foods> pageInfo=new PageInfo<>(allItems);
+
+        return pageInfo;
+    }
+
 
 }

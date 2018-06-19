@@ -94,7 +94,7 @@
                 </li>
 
                 <li>
-                    <a href="#" onclick="addContent('1')">
+                    <a href="#" onclick="addContent('wendu')">
                         <span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;&nbsp;帮助
                     </a>
                 </li>
@@ -213,6 +213,19 @@
                 }
             });
         }else if(num=="test"){
+            $.ajax({
+                url: "/Foods/getFoodsById",
+                type:"POST",
+                data: {
+                    "Id": '3'
+                },
+                cache: false,
+                success: function (html) {
+                    $("#content").append(html);
+                }
+            });
+        }
+        else if(num=="wendu"){
             $.ajax({
                 url: "/Foods/getFoodsById",
                 type:"POST",

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style type="text/css">
+    #findTable{
+        font-size:16px;
+    }
+    .findButton{
+        margin-top:-5px;
+        margin-bottom:-5px;
+    }
+    .findNav{
+        float:right;
+    }
+</style>
+<body>
+<div id="findTable">
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>名称</th>
+            <th>种类</th>
+            <th>数量</th>
+            <th>位置</th>
+            <th>入库时间</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="allFood:${allFoods}">
+            <td>[[${allFood.foodId}]]</td>
+            <td th:text="${allFood.foodName}"></td>
+            <td th:text="${allFood.foodsType.typeName}"></td>
+            <td>[[${allFood.foodNums}]]</td>
+            <td th:text="${allFood.foodHouseId}"></td>
+            <td th:text="${allFood.foodStoragetime}"></td>
+            <td>
+                <button class="btn btn-danger findButton" onclick="getTemperatrue()">温度
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <!--分页码-->
+    <nav class="findNav">
+        <ul class="pagination">
+            <li th:class="${pageInfo.hasPreviousPage}? '':'disabled'">
+                <a th:onclick="'javascript:turnToPage('+${pageInfo.pageNum-1}+')'" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </li>
+            <!--导航吗-->
+            <li th:each="nav:${pageInfo.navigatepageNums}" th:class="${pageInfo.pageNum==nav}? 'active':''">
+                <a th:onclick="'javascript:turnToPage('+${nav}+')'" th:text="${nav}"></a>
+            </li>
+
+            <!--<li th:each="nav:${pageInfo.navigatepageNums}">-->
+            <!--<a th:onclick="'javascript:turnToPage('+${nav}+')'" th:text="${nav}"></a>-->
+            <!--</li>-->
+
+            <li th:class="${pageInfo.hasNextPage}? '':'disabled'">
+                <a th:onclick="'javascript:turnToPage('+${pageInfo.pageNum+1}+')'" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<script type="text/javascript">
+    //跳转页面
+    function turnToPage(pageNum){
+        $.ajax({
+            url: "/foods/showAllFood",
+            type:"POST",
+            data: {
+                "currentPage": pageNum
+            },
+            cache: false,
+            success: function (html) {
+                $("#findTable").empty();
+                $("#findTable").append(html);
+            }
+        });
+    }
+    //获取温度
+    function getTemperatrue(pageNum){
+        $.ajax({
+            url: "/Foods/FoodTemperature",
+            type:"GET",
+            cache: false,
+            success: function (html) {
+                $("#findTable").empty();
+                $("#findTable").append(html);
+            }
+        });
+    }
+
+</script>
+
+
+</body>
+</html>

@@ -26,4 +26,7 @@ public interface FoodsMapper {
 
     //根据食物id查找
     public Foods getFoodsById(Integer id);
+
+    //根据食物Id或者时间范围查找食物（为温度）
+    public List<Foods> findFoodsByIdOrTime(Integer foodId,String dateTimeRange);
 }

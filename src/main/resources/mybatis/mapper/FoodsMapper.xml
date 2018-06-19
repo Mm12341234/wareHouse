@@ -32,7 +32,15 @@
        a.foodProducer foodProducer,a.foodShelvesId foodShelvesId,a.foodHouseId foodHouseId,a.foodStorageTime foodStorageTime,
        b.typeId typeId,b.typeName typeName
        from foods a, foodstype b
-       where a.foodId=#{id} and a.foodTypeId=B.typeId
+       where a.foodId=#{id} and a.foodTypeId=b.typeId
     </select>
 
+    <!--根据食物的id或者是日期范围，为温度-->
+    <select id="findFoodsByIdOrTime" resultMap="showFoodsList">
+        select a.foodId foodId, a.foodName foodName,a.foodPrice foodPrice,a.foodNums foodNums,a.foodShelflife foodShelflife,
+       a.foodProducer foodProducer,a.foodShelvesId foodShelvesId,a.foodHouseId foodHouseId,a.foodStorageTime foodStorageTime,
+       b.typeId typeId,b.typeName typeName
+       from foods a, foodstype b
+       where a.foodTypeId=b.typeId
+    </select>
 </mapper>

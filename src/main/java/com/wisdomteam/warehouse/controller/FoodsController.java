@@ -90,8 +90,21 @@ public class FoodsController {
     }
 
     //根据日期或者id查询食物
-    public String getFoodsByIdOrTime(){
-        return "null";
+    @PostMapping("/foods/findFoodsForTemperature")
+    public String getFoodsByIdOrTime(@RequestParam("foodId") Integer foodId,
+                                     @RequestParam("dateTimeRange") String dateTimeRange,
+                                     @RequestParam("currentPage") Integer currentPage,
+                                     Model model){
+//        System.out.println(foodId);
+//        System.out.println(dateTimeRange);
+//        System.out.println(currentPage);
+        PageInfo<Foods> pageInfo=foodsService.findFoodsByIdOrTime(1,10,2,"12");
+        List<Foods> allItems=pageInfo.getList();
+        model.addAttribute("allFoods",allItems);
+        model.addAttribute("pageInfo",pageInfo);
+//        System.out.println(pageInfo);
+        model.addAttribute("currentPage",currentPage);
+        return "/FoodTemperature/FoodList";
     }
 
 }

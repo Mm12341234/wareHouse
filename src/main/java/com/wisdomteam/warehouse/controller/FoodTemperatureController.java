@@ -1,17 +1,14 @@
 package com.wisdomteam.warehouse.controller;
 
-import com.alibaba.druid.support.json.JSONUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wisdomteam.warehouse.bean.FoodTemperature;
 import com.wisdomteam.warehouse.service.FoodTemperatureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
-import java.util.Collection;
 import java.util.List;
 
 @Controller
@@ -29,7 +26,7 @@ public class FoodTemperatureController {
     //点击按钮，获得温度的界面
     @GetMapping("/Foods/FoodTemperature")
     public String foodTemperature(){
-        return "FoodTemperature";
+        return "/FoodTemperature/FoodTemperature";
     }
 
     //从后台异步加载，真正获取食物温度的数据
