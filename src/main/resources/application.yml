@@ -19,6 +19,12 @@ spring:
       testOnBorrow: false
       testOnReturn: false
       poolPreparedStatements: true
+ #日期格式化
+  mvc:
+    date-format: yyyy-MM-dd
+  #禁用缓存
+  thymeleaf:
+    cache: false
 #配置监控统计拦截的filters,去掉后监控界面sql无法统计，“wall"用于防火墙
 #       filters: stat,wall,log4j
 #       maxPoolPreparedStatementPerConnectionSize: 20
@@ -28,6 +34,7 @@ spring:
 #          - classpath:sql/department.sql
 #          - classpath:sql/employee.sql
 
-#mybatis:
-#   config-location: classpath:mybatis/mybatis-config.xml
-#   mapper-locations: classpath:mybatis/mapper/*.xml
+
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml

@@ -20,10 +20,10 @@ public class FoodTemperatureController {
     @Autowired
     FoodTemperatureService foodTemperatureService;
 
-    //显示温度的按钮
+    //显示查找食物温度
     @GetMapping("/Foods/showFoodTemperature")
     public String getFoodTemperature(){
-        return "showFoodTemperature";
+        return "/FoodTemperature/findFood";
     }
 
     //点击按钮，获得温度的界面
@@ -32,7 +32,7 @@ public class FoodTemperatureController {
         return "FoodTemperature";
     }
 
-    //从后台获取数据
+    //从后台异步加载，真正获取食物温度的数据
     @ResponseBody
     @PostMapping("/Foods/getFoodTemperature")
     public String getFoodTemperature(@RequestParam("foodId") Integer foodId) throws JsonProcessingException {

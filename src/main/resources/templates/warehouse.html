@@ -8,6 +8,13 @@
     <link th:href="@{font-awesome/css/font-awesome.css}" rel="stylesheet">
     <script th:src="@{js/jquery-1.12.4.min.js}"></script>
     <script th:src="@{bootstrap/dist/js/bootstrap.js}"></script>
+    <style type="text/css">
+        .frames{
+            margin-top:-20px;
+            height:100%;
+        }
+
+    </style>
 </head>
 <body>
 <!--顶部导航条-->
@@ -37,7 +44,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" onclick="addContent('ditu')">
+                    <a href="#" onclick="addContent('showMap')">
                         <i class="glyphicon glyphicon-cog"></i>&nbsp;&nbsp;&nbsp;仓库管理
                     </a>
                 </li>
@@ -81,7 +88,7 @@
                 </li>
 
                 <li>
-                    <a href="#" onclick="addContent('1')">
+                    <a href="#" onclick="addContent('test')">
                         <span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;&nbsp;设置
                     </a>
                 </li>
@@ -98,11 +105,12 @@
         <div class="containerRight">
 
             <div id="content">
-                <div class="frames">
-                    <iframe name="left" id="rightMain"  frameborder="false" scrolling="auto"
-                            style="border:none;" width="100%" height="580px" allowtransparency="true">
-                    </iframe>
-                </div>
+                <!--<div class="frames">-->
+                    <!--<iframe name="left" id="rightMain"  frameborder="false" scrolling="auto"-->
+                            <!--style="border:none;" width="100%" height="580px" allowtransparency="true"-->
+                            <!--src="getPage/showMap">-->
+                    <!--</iframe>-->
+                <!--</div>-->
             </div>
 
         </div>
@@ -124,7 +132,16 @@
                     $("#content").append(html);
                 }
             });
-        } else if(num=="addFood"){
+        }else if(num=="showMap"){
+            $("#content").append("<div class='frames'>\n" +
+                "                <iframe name='left' id='rightMain'  frameborder='false' scrolling='auto'\n" +
+                "            style='border:none;' width='100%' height='880px' allowtransparency='true'\n" +
+                "            src='getPage/showMap'>\n" +
+                "                </iframe>\n" +
+                "                </div>")
+
+            // $("#content").append("<iframe src='GetPage/showMap.html'></iframe>")
+        }  else if(num=="addFood"){
             // window.location.href = "/foods/showAddFood";
             $.ajax({
                 url: "/foods/showAddFood",
@@ -190,6 +207,18 @@
             $.ajax({
                 url: "getPage/findPage",
                 type:"GET",
+                cache: false,
+                success: function (html) {
+                    $("#content").append(html);
+                }
+            });
+        }else if(num=="test"){
+            $.ajax({
+                url: "/Foods/getFoodsById",
+                type:"POST",
+                data: {
+                    "Id": '3'
+                },
                 cache: false,
                 success: function (html) {
                     $("#content").append(html);

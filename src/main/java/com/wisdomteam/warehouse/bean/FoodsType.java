@@ -16,4 +16,12 @@ public class FoodsType {
     public void setTypeName(String typeName) {
         this.typeName = typeName;
     }
+
+    @Override
+    public String toString() {
+        return "FoodsType{" +
+                "typeId=" + typeId +
+                ", typeName='" + typeName + '\'' +
+                '}';
+    }
 }

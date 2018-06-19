@@ -34,7 +34,7 @@
         <tr th:each="allFood:${allFoods}">
             <td>[[${allFood.foodId}]]</td>
             <td th:text="${allFood.foodName}"></td>
-            <td th:text="${allFood.foodTypeId}"></td>
+            <!--<td th:text="${allFood.foodsType.getTypeName()}"></td>-->
             <td>[[${allFood.foodNums}]]</td>
             <td th:text="${allFood.foodHouseId}"></td>
             <td th:text="${allFood.foodStoragetime}"></td>

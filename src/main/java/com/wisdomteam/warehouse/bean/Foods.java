@@ -79,12 +79,12 @@ public class Foods {
     public Foods() {
     }
 
-    public Foods(String foodName, FoodsType foodsType) {
+    public Foods(String foodName, Integer foodsTypeId) {
         this.foodName = foodName;
-        this.foodsType = foodsType;
+        this.foodsType.setTypeId(foodsTypeId);
     }
 
-    public Foods(String foodName, FoodsType foodsType, Double foodPrice,
+    public Foods(String foodName, Integer foodsTypeId, Double foodPrice,
                  Integer foodNums, Integer foodShelflife, String foodProducer,
                  Integer foodShelvesId, Integer foodHouseId, Date foodStoragetime) {
         this.foodName = foodName;
@@ -95,6 +95,22 @@ public class Foods {
         this.foodShelvesId = foodShelvesId;
         this.foodHouseId = foodHouseId;
         this.foodStoragetime = foodStoragetime;
-        this.foodsType=foodsType;
+        this.foodsType.setTypeId(foodsTypeId);
+    }
+
+    @Override
+    public String toString() {
+        return "Foods{" +
+                "foodId=" + foodId +
+                ", foodName='" + foodName + '\'' +
+                ", foodPrice=" + foodPrice +
+                ", foodNums=" + foodNums +
+                ", foodShelflife=" + foodShelflife +
+                ", foodProducer='" + foodProducer + '\'' +
+                ", foodShelvesId=" + foodShelvesId +
+                ", foodHouseId=" + foodHouseId +
+                ", foodStoragetime=" + foodStoragetime +
+                ", foodsType=" + foodsType +
+                '}';
     }
 }

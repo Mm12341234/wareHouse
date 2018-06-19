@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 写Sql语句   -->
+<mapper namespace="com.wisdomteam.warehouse.mapper.FoodsMapper">
+
+    <resultMap id="showFoodsList" type="com.wisdomteam.warehouse.bean.Foods">
+        <id column="foodId" property="foodId"/>
+        <result column="foodName" property="foodName"/>
+        <result column="foodPrice" property="foodPrice" />
+        <result column="foodNums" property="foodNums"/>
+        <result column="foodShelflife" property="foodShelflife"/>
+        <result column="foodProducer" property="foodProducer"/>
+        <result column="foodShelvesId" property="foodShelvesId"/>
+        <result column="foodHouseId" property="foodHouseId"/>
+        <result column="foodStoragetime" property="foodStoragetime"/>
+        <association property="foodsType" javaType="com.wisdomteam.warehouse.bean.FoodsType">
+            <id column="typeId" property="typeId"/>
+            <result column="typeName" property="typeName"/>
+        </association>
+    </resultMap>
+
+    <!--查看全部食物-->
+    <select id="getAllFoods" resultMap="showFoodsList">
+        select * from foods
+    </select>
+
+    <!--根据食物Id查找-->
+    <select id="getFoodsById" resultMap="showFoodsList">
+       select a.foodId foodId, a.foodName foodName,a.foodPrice foodPrice,a.foodNums foodNums,a.foodShelflife foodShelflife,
+       a.foodProducer foodProducer,a.foodShelvesId foodShelvesId,a.foodHouseId foodHouseId,a.foodStorageTime foodStorageTime,
+       b.typeId typeId,b.typeName typeName
+       from foods a, foodstype b
+       where a.foodId=#{id} and a.foodTypeId=B.typeId
+    </select>
+
+</mapper>

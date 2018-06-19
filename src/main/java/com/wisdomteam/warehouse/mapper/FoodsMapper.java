@@ -16,11 +16,14 @@ public interface FoodsMapper {
     public int addFoods(Foods foods);
 
     //搜索全部的食物
-    @Select("select * from foods")
+//    @Select("select * from foods")
     public List<Foods> getAllFoods();
 
     //增添食物到仓库
     @Insert("insert into foods(foodName,foodTypeId,foodNums,foodStorageTime,foodHouseId)" +
             " values(#{foodName},#{foodTypeId},#{foodNums},#{foodStoragetime},#{foodHouseId})")
     public int putInStorage(Foods foods);
+
+    //根据食物id查找
+    public Foods getFoodsById(Integer id);
 }

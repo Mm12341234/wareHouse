@@ -80,5 +80,18 @@ public class FoodsController {
 //        String temperature=
 //        return temperature;
 //    }
+    //根据食物ID查找
+    @PostMapping("/Foods/getFoodsById")
+    public String getFoodsById(@RequestParam("Id") Integer Id,Model model){
+        Foods foods=foodsService.getFoodsById(Id);
+        System.out.println(foods);
+        model.addAttribute("foods",foods);
+        return "/Foods/getFoodsById";
+    }
+
+    //根据日期或者id查询食物
+    public String getFoodsByIdOrTime(){
+        return "null";
+    }
 
 }

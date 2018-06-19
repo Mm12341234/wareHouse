@@ -29,6 +29,7 @@ public class FoodsService {
         PageHelper.startPage(currentPage,pageSize);
         //获取全部数据
         List<Foods> allItems=foodsMapper.getAllFoods();
+//        System.out.println("21121212"+allItems+"121212");
         //取分页后结果
         PageInfo<Foods> pageInfo=new PageInfo<>(allItems);
         long total = pageInfo.getTotal();
@@ -49,6 +50,13 @@ public class FoodsService {
 
         Integer test=foodsMapper.putInStorage(foods);
         return test;
+    }
+
+    //根据ID查找食物
+    public Foods getFoodsById(Integer id){
+
+        Foods foods=foodsMapper.getFoodsById(id);
+        return foods;
     }
 
 }

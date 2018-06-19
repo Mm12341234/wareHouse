@@ -19,4 +19,10 @@ public class GetPageController {
     public String findPage(){
         return "/GetPage/findFood.html";
     }
+
+    //显示百度地图
+    @GetMapping("/getPage/showMap")
+    public String showMap(){
+        return "/getPage/showMap";
+    }
 }
