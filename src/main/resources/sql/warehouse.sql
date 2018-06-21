@@ -112,12 +112,6 @@ putinstorageDate Date DEFAULT NULL,
 PRIMARY KEY (id)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
-private Integer id;
-    private Integer putinstorageFoodId;
-    private Integer putinstorageAdminId;
-    private Integer putinstorageFoodNums;
-    private Date putinstorageDate;
-
 /******************   StorageTemperature    *****************/
 DROP TABLE IF EXISTS StorageTemperature;
 CREATE TABLE StorageTemperature(
