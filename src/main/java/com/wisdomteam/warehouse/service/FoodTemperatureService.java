@@ -16,9 +16,18 @@ public class FoodTemperatureService {
 
     //获取食物的温度
     public List<FoodTemperature> getFoodTemperature(Integer foodId){
-
         List<FoodTemperature> allItem=foodTemperatureMapper.getFoodTemperature(foodId);
         return allItem;
     }
+
+    /*
+     *  根据食物的ID和时间范围查询食品的温度
+     */
+    public List<FoodTemperature> getFoodTemperatureByTime(Integer foodId,String timeRange){
+        List<FoodTemperature> allItem=foodTemperatureMapper.getFoodTemperatureByTime(foodId,timeRange);
+        return allItem;
+    }
+
+
 
 }

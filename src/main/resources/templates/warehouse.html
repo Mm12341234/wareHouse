@@ -82,7 +82,7 @@
                 </li>
 
                 <li>
-                    <a href="#" onclick="addContent('')">
+                    <a href="#" onclick="addContent('sand')">
                         <span class="glyphicon glyphicon-bell"></span>&nbsp;&nbsp;&nbsp;紧急信息
                     </a>
                 </li>
@@ -94,7 +94,7 @@
                 </li>
 
                 <li>
-                    <a href="#" onclick="addContent('wendu')">
+                    <a href="#" onclick="addContent('test1')">
                         <span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;&nbsp;帮助
                     </a>
                 </li>
@@ -224,14 +224,28 @@
                     $("#content").append(html);
                 }
             });
-        }
-        else if(num=="wendu"){
+        } else if(num=="test1"){
             $.ajax({
-                url: "/Foods/getFoodsById",
-                type:"POST",
-                data: {
-                    "Id": '3'
-                },
+                url: "/Foods/FoodTemperatureByTime",
+                type:"GET",
+                cache: false,
+                success: function (html) {
+                    $("#content").append(html);
+                }
+            });
+        }else if(num=="sand"){
+            $.ajax({
+                url: "/getPage/FoodBaoZhi",
+                type:"GET",
+                cache: false,
+                success: function (html) {
+                    $("#content").append(html);
+                }
+            });
+        }else if(num=="admin"){
+            $.ajax({
+                url: "/admin/adminInfo",
+                type:"GET",
                 cache: false,
                 success: function (html) {
                     $("#content").append(html);

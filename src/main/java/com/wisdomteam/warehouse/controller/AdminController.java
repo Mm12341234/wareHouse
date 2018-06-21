@@ -4,6 +4,7 @@ import com.wisdomteam.warehouse.bean.Admin;
 import com.wisdomteam.warehouse.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -40,6 +41,17 @@ public class AdminController {
     @GetMapping("/warehouse")
     public String tiaozhuan(){
         return "warehouse";
+    }
+
+    //获得个人中心面板
+    @GetMapping("/admin/adminInfo")
+    public String getInfo(HttpSession session,Model model){
+
+        String adminId=session.getAttribute("AdminId").toString();
+//        System.out.print(adminId);
+        Admin admin=adminService.getAdminInfo(adminId);
+        model.addAttribute("admin",admin);
+        return "/Admin/admin";
     }
 
 }

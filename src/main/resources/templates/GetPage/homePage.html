@@ -11,7 +11,7 @@
             margin-top:25px;
             margin-left:7%;
         }
-        #main{
+        #main1{
             border:1px solid #cccccc;
             margin-left:3%;
             padding:5px;
@@ -39,18 +39,18 @@
     </div>
     <br><br><br><br><br><br><br><br><br><br>
     <!--仓库报警次数的的饼状图/折线图-->
-    <div class="storageTemperature" id="main">
+    <div class="storageTemperature" id="main1">
 
     </div>
 </div>
 <script type="text/javascript">
-    var myChart = echarts.init(document.getElementById('main'));
+    var myChart1 = echarts.init(document.getElementById('main1'));
 
     option = {
         //设计折线的标题样式什么的
         title: {
-            text: '仓库该月报警次数',
-            subtext: '10分钟',
+            text: '仓库报警次数',
+            subtext: '一周',
             //link: 'http//:www.baidu.com'
             textStyle: {
                 color:'red',
@@ -81,12 +81,12 @@
         xAxis:  {
             type: 'category',
             boundaryGap: false,
-            data: ['12:00','13:00','14:00','15:00','16:00','17:00','18:00']
+            data: ['周一','周二','周三','周四','周五','周六','周日']
         },
         yAxis: {
             type: 'value',
             axisLabel: {
-                formatter: '{value} C'
+                formatter: '{value} 次'
             }
         },
         series: [
@@ -129,7 +129,7 @@
     };
 
 
-    myChart.setOption(option);
+    myChart1.setOption(option);
 
 </script>
 </body>

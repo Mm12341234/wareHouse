@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 写Sql语句   -->
+<mapper namespace="com.wisdomteam.warehouse.mapper.PreFoodsMapper">
+
+    <resultMap id="showFoodsList" type="com.wisdomteam.warehouse.bean.PreFoods">
+        <id column="foodId" property="foodId"/>
+        <result column="foodName" property="foodName"/>
+        <result column="foodPrice" property="foodPrice" />
+        <result column="foodNums" property="foodNums"/>
+        <result column="foodShelflife" property="foodShelflife"/>
+        <result column="foodProducer" property="foodProducer"/>
+        <result column="foodShelvesId" property="foodShelvesId"/>
+        <result column="foodHouseId" property="foodHouseId"/>
+        <result column="foodStoragetime" property="foodStoragetime"/>
+        <result column="putinstorageDate" property="putinstorageDate"/>
+        <result column="putInType" property="putInType"/>
+        <association property="foodsType" javaType="com.wisdomteam.warehouse.bean.FoodsType">
+            <id column="typeId" property="typeId"/>
+            <result column="typeName" property="typeName"/>
+        </association>
+    </resultMap>
+
+    <!--public List<PreFoods> showPreFoods();-->
+    <select id="showPreFoods" resultMap="showFoodsList">
+        select a.foodId foodId, a.foodName foodName,a.foodPrice foodPrice,a.foodNums foodNums,a.foodShelflife foodShelflife,
+       a.foodProducer foodProducer,a.foodShelvesId foodShelvesId,a.foodHouseId foodHouseId,a.foodStorageTime foodStorageTime,
+       a.putInType putInType,a.putinstorageDate putinstorageDate,b.typeId typeId,b.typeName typeName
+       from prefoods a, foodstype b
+       where a.foodTypeId=b.typeId
+    </select>
+</mapper>

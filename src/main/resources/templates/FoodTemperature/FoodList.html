@@ -36,8 +36,8 @@
             <td th:text="${allFood.foodName}"></td>
             <td th:text="${allFood.foodsType.typeName}"></td>
             <td>[[${allFood.foodNums}]]</td>
-            <td th:text="${allFood.foodHouseId}"></td>
-            <td th:text="${allFood.foodStoragetime}"></td>
+            <td th:text="'仓库'+${allFood.foodHouseId}"></td>
+            <td th:text="${#dates.format(allFood.foodStoragetime,'yyyy-MM-dd HH:mm:ss')}"></td>
             <td>
                 <button class="btn btn-danger findButton" onclick="getTemperatrue()">温度
                 </button>

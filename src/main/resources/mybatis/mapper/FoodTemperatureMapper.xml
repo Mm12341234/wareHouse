@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 写Sql语句   -->
+<mapper namespace="com.wisdomteam.warehouse.mapper.FoodTemperatureMapper">
+    <resultMap id="showFoodTemperatureList" type="com.wisdomteam.warehouse.bean.FoodTemperature">
+        <id column="id" property="id"/>
+        <result column="foodId" property="foodId"/>
+        <result column="foodTemperature" property="foodTemperature" />
+        <result column="temperatureTime" property="temperatureTime"/>
+    </resultMap>
+
+    <!--根据食品的id及其相关时间查询-->
+    <!--public List<FoodTemperature> getFoodTemperatureByTime(Integer foodId,String DataTimeArange);-->
+    <select id="getFoodTemperatureByTime" resultMap="showFoodTemperatureList">
+        select * from foodtemperature where foodId=#{param1} And temperatureTime>#{param2}
+    </select>
+
+
+
+    <!--往数据库增添数据，为定时器服务-->
+    <!--public void addFoodTemperature(double temperature,String data);-->
+    <insert id="addFoodTemperature" >
+        insert into foodTemperature(foodId,foodTemperature,temperatureTime)value(2,#{param1},#{param2})
+    </insert>
+
+
+</mapper>

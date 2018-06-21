@@ -10,6 +10,6 @@ import java.util.List;
 public interface PreFoodsMapper {
 
 //    显示自动入库的数据（模拟）
-    @Select("select * from prefoods")
+//    @Select("select * from prefoods")
     public List<PreFoods> showPreFoods();
 }

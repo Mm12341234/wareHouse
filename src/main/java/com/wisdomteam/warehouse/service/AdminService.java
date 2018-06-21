@@ -28,4 +28,9 @@ public class AdminService {
          Admin admin=adminMapper.getAdminById(id);
          return admin;
     }
+    //查询用户的基本资料
+    public Admin getAdminInfo(String id){
+        Admin admin=adminMapper.getAdminInfo(id);
+        return admin;
+    }
 }

@@ -14,5 +14,8 @@ public interface AdminMapper {
     @Select("select * from admin where adminId=#{id}")
     public Admin getAdminById(Integer id);
 
+    //查询管理的基本资料
+    public Admin getAdminInfo(String id);
+
 
 }

@@ -1,8 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!--引入主面板的样式-->
+    <!--<link th:href="@{css/warehouse.css}" rel="stylesheet">-->
+    <!--<link th:href="@{bootstrap/dist/css/bootstrap.css}" rel="stylesheet">-->
+    <!--<link th:href="@{font-awesome/css/font-awesome.css}" rel="stylesheet">-->
+    <!--<script th:src="static/js/jquery-1.12.4.min.js"></script>-->
+    <!--<script th:src="@{bootstrap/dist/js/bootstrap.js}"></script>-->
     <title></title>
     <style type="text/css">
         html{height:100%}
@@ -27,6 +31,8 @@
         }
     </style>
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=P40qn7UAoLq4t6PmgVLvGYVqPTflNdZ9"></script>
+    <!--注意这里的路径问题-->
+    <script th:src="@{../js/jquery-1.12.4.min.js}"></script>
 </head>
 
 <body>
@@ -47,7 +53,7 @@
         [112.503214, 23.112928, "<br/><br/>"
         + "<div class='cangKu'>&nbsp;&nbsp;&nbsp;名称:仓库一</div><br/>"
         + "<div class='cangKu'>&nbsp;&nbsp;&nbsp;位置:肇庆学院</div>"
-        + "<a class='link' href='/house1'>进入</a>"],
+        + "<a class='link' href='../getPage/house1'>进入</a>"],
 
         [112.508244, 23.106679, "<br/><br/>"
         + "<div class='cangKu'>&nbsp;&nbsp;&nbsp;名称:仓库二</div><br/>"
@@ -101,7 +107,20 @@
         var infoWindow = new BMap.InfoWindow(content, opts);  // 创建信息窗口对象
         map.openInfoWindow(infoWindow, point); //开启信息窗口
     }
-
+    //显示3d全局图
+    function getWholeSituation(){
+        alert("1212");
+        $.ajax({
+            url: "/getPage/house1",
+            type:"GET",
+            cache: false,
+            success: function (html) {
+                alert("212");
+                // $("#content").empty();
+                // $("#content").append(html);
+            }
+        });
+    }
 
 </script>
 </body>

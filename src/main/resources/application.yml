@@ -20,8 +20,8 @@ spring:
       testOnReturn: false
       poolPreparedStatements: true
  #日期格式化
-  mvc:
-    date-format: yyyy-MM-dd
+#  mvc:
+#    date-format: yyyy-MM-dd
   #禁用缓存
   thymeleaf:
     cache: false

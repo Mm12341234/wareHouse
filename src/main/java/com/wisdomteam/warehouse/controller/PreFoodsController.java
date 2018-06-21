@@ -26,7 +26,6 @@ public class PreFoodsController {
         List<PreFoods> allItems=pageInfo.getList();
         model.addAttribute("allFoods",allItems);
         model.addAttribute("pageInfo",pageInfo);
-        System.out.println(pageInfo);
         model.addAttribute("currentPage",currentPage);
         return "/PutInStorage/autoPutInStorage";
     }

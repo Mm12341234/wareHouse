@@ -6,7 +6,6 @@ public class PreFoods {
 
     private Integer foodId;
     private String foodName;
-    private Integer foodTypeId;
     private Double foodPrice;
     private Integer foodNums;
     private Integer foodShelflife;
@@ -16,6 +15,24 @@ public class PreFoods {
     private Integer foodStoragetime;
     private Integer putinstorageAdminId;
     private Date putinstorageDate;
+    private FoodsType foodsType;
+    private String putInType;
+
+    public FoodsType getFoodsType() {
+        return foodsType;
+    }
+
+    public void setFoodsType(FoodsType foodsType) {
+        this.foodsType = foodsType;
+    }
+
+    public String getPutInType() {
+        return putInType;
+    }
+
+    public void setPutInType(String putInType) {
+        this.putInType = putInType;
+    }
 
     public Integer getPutinstorageAdminId() {
         return putinstorageAdminId;
@@ -44,12 +61,6 @@ public class PreFoods {
     }
     public void setFoodName(String foodName) {
         this.foodName = foodName;
-    }
-    public Integer getFoodTypeId() {
-        return foodTypeId;
-    }
-    public void setFoodTypeId(Integer foodTypeId) {
-        this.foodTypeId = foodTypeId;
     }
     public Double getFoodPrice() {
         return foodPrice;
